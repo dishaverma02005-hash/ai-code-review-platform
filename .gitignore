@@ -1,0 +1,57 @@
+ # ---- Maven build output ----
+  target/
+  *.class
+  *.jar
+  *.war
+
+  # ---- Maven local repo ----
+  .m2/
+
+  # ---- IDE files ----
+  .vscode/
+  !.vscode/extensions.json
+  !.vscode/settings.json
+
+  .idea/
+  *.iml
+  *.iws
+  *.ipr
+
+  .project
+  .classpath
+  .settings/
+  .factorypath
+  .apt_generated/
+  .springBeans
+
+  # ---- OS files ----
+  Thumbs.db
+  ehthumbs.db
+  Desktop.ini
+  $RECYCLE.BIN/
+  .DS_Store
+
+  # ---- Logs ----
+  *.log
+  logs/
+
+  # ---- Environment / secrets ----
+  .env
+  .env.*
+  application-local.yml
+  application-local.properties
+
+  # ---- Node / frontend (for Day 9) ----
+  node_modules/
+  dist/
+  build/
+  .next/
+  .parcel-cache/
+
+  # ---- Misc ----
+  *.swp
+  *.swo
+  *~
+
+  # ---- Spring Boot ----
+  HELP.md
