@@ -1,8 +1,27 @@
-# Spring Boot configuration for AI Code Review Platform - Day 1
+# Spring Boot configuration for AI Code Review Platform - Day 2
 
 spring:
   application:
     name: ai-code-review-platform
+
+  # PostgreSQL database connection
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ai_code_review
+    username: appuser
+    password: app_password_123
+    driver-class-name: org.postgresql.Driver
+
+  # JPA / Hibernate settings
+  jpa:
+    hibernate:
+      # 'update' = create tables if missing, never drop existing data
+      ddl-auto: update
+    properties:
+      hibernate:
+        # Print every SQL statement Hibernate runs (helpful for learning)
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
 
 # Web server settings
 server:
@@ -16,3 +35,4 @@ logging:
   level:
     root: INFO
     com.aicodereview.platform: INFO
+    org.hibernate.SQL: DEBUG
