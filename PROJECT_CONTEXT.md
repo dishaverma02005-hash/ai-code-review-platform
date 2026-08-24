@@ -47,7 +47,7 @@ com.aicodereview.platform
 
 ## Current Day
 
-Day 2 — COMPLETE
+Day 3 — COMPLETE
 
 ## Completed Features
 
@@ -68,6 +68,14 @@ Day 2 — COMPLETE
 - Hibernate auto-created `users` table on startup
 - /api/health verified: 200 {"status":"UP","message":"Backend is running"}
 - /api/users verified: 200 []
+- spring-boot-starter-security, jjwt, and spring-boot-starter-validation added to pom.xml
+- JwtService generates and validates HS384 JWTs (jwt.expiration = 24h)
+- Auth DTOs created: RegisterRequest, LoginRequest, AuthResponse with bean validation
+- AuthService hashes passwords with BCrypt and issues JWTs on register/login
+- AuthController exposes POST /api/auth/register and POST /api/auth/login
+- JwtAuthFilter runs on every request, reads the Bearer token, sets the security context
+- SecurityConfig: public /api/auth/** and /api/health; everything else requires a valid JWT
+- End-to-end tested: /api/users returns 403 without token, 200 with token; login returns a fresh token
 
 ## Remaining Features
 
@@ -85,10 +93,20 @@ ai-code-review-platform/
 │   ├── AiCodeReviewPlatformApplication.java
 │   ├── health/
 │   │   └── HealthController.java
-│   └── user/
-│       ├── User.java
-│       ├── UserRepository.java
-│       └── UserController.java
+│   ├── user/
+│   │   ├── User.java
+│   │   ├── UserRepository.java
+│   │   └── UserController.java
+│   ├── auth/
+│   │   ├── RegisterRequest.java
+│   │   ├── LoginRequest.java
+│   │   ├── AuthResponse.java
+│   │   ├── AuthService.java
+│   │   └── AuthController.java
+│   └── security/
+│       ├── JwtService.java
+│       ├── JwtAuthFilter.java
+│       └── SecurityConfig.java
 ├── src/main/resources/
 │   └── application.yml
 └── target/ (git-ignored)
