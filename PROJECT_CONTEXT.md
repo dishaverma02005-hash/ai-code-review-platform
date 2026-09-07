@@ -47,7 +47,7 @@ com.aicodereview.platform
 
 ## Current Day
 
-Day 3 — COMPLETE
+Day 5 — COMPLETE
 
 ## Completed Features
 
@@ -76,6 +76,17 @@ Day 3 — COMPLETE
 - JwtAuthFilter runs on every request, reads the Bearer token, sets the security context
 - SecurityConfig: public /api/auth/** and /api/health; everything else requires a valid JWT
 - End-to-end tested: /api/users returns 403 without token, 200 with token; login returns a fresh token
+- Submission JPA entity created with id, code, user, submittedAt
+- SubmissionRepository created with custom query to find by user (ordered by date)
+- SubmissionController exposes POST /api/submissions (create) and GET /api/submissions (list)
+- SubmissionService handles associating the code with the authenticated user from the security context
+- End-to-end tested: can submit code and retrieve it using a JWT token
+- javaparser-core 3.26.2 added to pom.xml
+- Created analysis package: AnalysisIssue, AnalysisResult, CodeAnalyzerService, AnalysisController
+- CodeAnalyzerService parses submitted code with JavaParser and detects unused imports
+- AnalysisController exposes POST /api/analysis/{submissionId}
+- /api/analysis/** protected by JWT (inherits from SecurityConfig's anyRequest().authenticated())
+- End-to-end tested: registered test user, submitted code with an unused import, confirmed 403 without token and 200 with token, correctly flagged "Unused import: java.util.List"
 
 ## Remaining Features
 
@@ -103,10 +114,20 @@ ai-code-review-platform/
 │   │   ├── AuthResponse.java
 │   │   ├── AuthService.java
 │   │   └── AuthController.java
-│   └── security/
-│       ├── JwtService.java
-│       ├── JwtAuthFilter.java
-│       └── SecurityConfig.java
+│   ├── security/
+│   │   ├── JwtService.java
+│   │   ├── JwtAuthFilter.java
+│   │   └── SecurityConfig.java
+│   ├── submission/
+│   │   ├── Submission.java
+│   │   ├── SubmissionRepository.java
+│   │   ├── SubmissionService.java
+│   │   └── SubmissionController.java
+│   └── analysis/
+│       ├── AnalysisIssue.java
+│       ├── AnalysisResult.java
+│       ├── CodeAnalyzerService.java
+│       └── AnalysisController.java
 ├── src/main/resources/
 │   └── application.yml
 └── target/ (git-ignored)
@@ -132,3 +153,4 @@ ai-code-review-platform/
 
 ```powershell
 mvn spring-boot:run
+```

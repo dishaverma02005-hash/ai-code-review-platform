@@ -1,4 +1,8 @@
 C:\Users\ACER\Documents\ai-code-review-platform\src\main\java\com\aicodereview\platform\AiCodeReviewPlatformApplication.java
+C:\Users\ACER\Documents\ai-code-review-platform\src\main\java\com\aicodereview\platform\analysis\AnalysisController.java
+C:\Users\ACER\Documents\ai-code-review-platform\src\main\java\com\aicodereview\platform\analysis\AnalysisIssue.java
+C:\Users\ACER\Documents\ai-code-review-platform\src\main\java\com\aicodereview\platform\analysis\AnalysisResult.java
+C:\Users\ACER\Documents\ai-code-review-platform\src\main\java\com\aicodereview\platform\analysis\CodeAnalyzerService.java
 C:\Users\ACER\Documents\ai-code-review-platform\src\main\java\com\aicodereview\platform\auth\AuthController.java
 C:\Users\ACER\Documents\ai-code-review-platform\src\main\java\com\aicodereview\platform\auth\AuthResponse.java
 C:\Users\ACER\Documents\ai-code-review-platform\src\main\java\com\aicodereview\platform\auth\AuthService.java
@@ -8,6 +12,12 @@ C:\Users\ACER\Documents\ai-code-review-platform\src\main\java\com\aicodereview\p
 C:\Users\ACER\Documents\ai-code-review-platform\src\main\java\com\aicodereview\platform\security\JwtAuthFilter.java
 C:\Users\ACER\Documents\ai-code-review-platform\src\main\java\com\aicodereview\platform\security\JwtService.java
 C:\Users\ACER\Documents\ai-code-review-platform\src\main\java\com\aicodereview\platform\security\SecurityConfig.java
+C:\Users\ACER\Documents\ai-code-review-platform\src\main\java\com\aicodereview\platform\submission\CreateSubmissionRequest.java
+C:\Users\ACER\Documents\ai-code-review-platform\src\main\java\com\aicodereview\platform\submission\Submission.java
+C:\Users\ACER\Documents\ai-code-review-platform\src\main\java\com\aicodereview\platform\submission\SubmissionController.java
+C:\Users\ACER\Documents\ai-code-review-platform\src\main\java\com\aicodereview\platform\submission\SubmissionRepository.java
+C:\Users\ACER\Documents\ai-code-review-platform\src\main\java\com\aicodereview\platform\submission\SubmissionResponse.java
+C:\Users\ACER\Documents\ai-code-review-platform\src\main\java\com\aicodereview\platform\submission\SubmissionService.java
 C:\Users\ACER\Documents\ai-code-review-platform\src\main\java\com\aicodereview\platform\user\User.java
 C:\Users\ACER\Documents\ai-code-review-platform\src\main\java\com\aicodereview\platform\user\UserController.java
 C:\Users\ACER\Documents\ai-code-review-platform\src\main\java\com\aicodereview\platform\user\UserRepository.java
