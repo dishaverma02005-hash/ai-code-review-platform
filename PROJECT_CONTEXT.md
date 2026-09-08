@@ -47,7 +47,7 @@ com.aicodereview.platform
 
 ## Current Day
 
-Day 5 — COMPLETE
+Day 6 — COMPLETE
 
 ## Completed Features
 
@@ -87,6 +87,11 @@ Day 5 — COMPLETE
 - AnalysisController exposes POST /api/analysis/{submissionId}
 - /api/analysis/** protected by JWT (inherits from SecurityConfig's anyRequest().authenticated())
 - End-to-end tested: registered test user, submitted code with an unused import, confirmed 403 without token and 200 with token, correctly flagged "Unused import: java.util.List"
+- AnalysisIssue updated with a severity field (LOW/MEDIUM/HIGH)
+- AnalysisResult updated with a score field (0-100)
+- ScoringService created: deducts 3/7/15 points per LOW/MEDIUM/HIGH issue, floor of 0
+- CodeAnalyzerService expanded with checkLongMethods, checkNamingConvention, checkHardcodedSecrets (in addition to existing checkUnusedImports and checkEmptyCatchBlocks)
+- End-to-end tested: submitted code with an unused import, empty catch block, non-camelCase method name, and a hardcoded password — all 4 issues correctly detected with matching severities (LOW, MEDIUM, LOW, HIGH), final score computed correctly as 72/100
 
 ## Remaining Features
 
@@ -126,6 +131,7 @@ ai-code-review-platform/
 │   └── analysis/
 │       ├── AnalysisIssue.java
 │       ├── AnalysisResult.java
+│       ├── ScoringService.java
 │       ├── CodeAnalyzerService.java
 │       └── AnalysisController.java
 ├── src/main/resources/
@@ -146,6 +152,7 @@ ai-code-review-platform/
 - DB user: appuser
 - Database credentials are stored only in local configuration and are NOT stored in this project context file
 - Hibernate ddl-auto: update (auto-creates tables, never drops data)
+- Scoring weights: LOW = -3, MEDIUM = -7, HIGH = -15, score floor = 0
 
 ## Commands Reference
 
@@ -153,4 +160,53 @@ ai-code-review-platform/
 
 ```powershell
 mvn spring-boot:run
+```
+
+### Stop the backend
+
+Ctrl + C in its terminal
+
+### Test health endpoint
+
+```powershell
+Invoke-WebRequest -Uri "http://localhost:8080/api/health" -Method GET -UseBasicParsing
+```
+
+### Register a user
+
+```powershell
+Invoke-WebRequest -Uri "http://localhost:8080/api/auth/register" -Method POST -UseBasicParsing -Headers @{"Content-Type"="application/json"} -Body '{"username": "yourUsername", "email": "you@example.com", "password": "YourPassword1!"}'
+```
+
+### Log in
+
+```powershell
+Invoke-WebRequest -Uri "http://localhost:8080/api/auth/login" -Method POST -UseBasicParsing -Headers @{"Content-Type"="application/json"} -Body '{"username": "yourUsername", "password": "YourPassword1!"}'
+```
+
+### Submit code (requires JWT)
+
+```powershell
+Invoke-WebRequest -Uri "http://localhost:8080/api/submissions" -Method POST -UseBasicParsing -Headers @{Authorization = "Bearer YOUR_TOKEN"; "Content-Type"="application/json"} -Body '{"code": "your java code here"}'
+```
+
+### Analyze a submission (requires JWT)
+
+```powershell
+Invoke-WebRequest -Uri "http://localhost:8080/api/analysis/SUBMISSION_ID" -Method POST -UseBasicParsing -Headers @{Authorization = "Bearer YOUR_TOKEN"}
+```
+
+### Pretty-print an analysis response
+
+```powershell
+$result = Invoke-WebRequest -Uri "http://localhost:8080/api/analysis/SUBMISSION_ID" -Method POST -UseBasicParsing -Headers @{Authorization = "Bearer YOUR_TOKEN"}
+$result.Content | ConvertFrom-Json | ConvertTo-Json -Depth 5
+```
+
+### Commit changes
+
+```powershell
+git add .
+git commit -m "Day X: <what you did>"
+git push
 ```
